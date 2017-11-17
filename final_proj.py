@@ -27,7 +27,8 @@ def read_files(data, prefix):
     #open AS file and read through each line, splitting each by pipe
     with open(fileIn) as file:
         for line in file:
-            line = line.rstrip('\n')
+            # Don't need this bc with takes care of closing file at the end, and it's reading + printing 1 line at a time 
+            # line = line.rstrip('\n')
             index = line.split('|')
             indexQ = [] # this local list is inserted into the lookup Queue
             if index[0] not in data:
@@ -45,14 +46,14 @@ def read_files(data, prefix):
 
             if index[2] == '-1':
                 data[index[0]]['as_links']['p2c'].append(index[1])
-                # create a lookup list for the provider from this parsed line
-                indexQ.append(index[0])
-                indexQ.append(index[1])
-                indexQ.append(index[2])
-                lookupProvider.append(indexQ)
             # peers - p2p-link
             elif index[2] == '0':
                 data[index[0]]['as_links']['p2p'].append(index[1])
+            # create a lookup list for the provider from this parsed line
+            indexQ.append(index[0])
+            indexQ.append(index[1])
+            indexQ.append(index[2])
+            lookupProvider.append(indexQ)
     file.close()
 
     print ("Starting to look up providers")
@@ -232,8 +233,8 @@ def write_new_file(data, t1, n_prefix):
 # figure out the numbers of node degree in the dataset
 def n_degree(data):
     for a_s in data:
-        data[a_s]['degreeProv'] = len(data[a_s]['as_links']['p2c']) + len(data[a_s]['as_links']['p2p'])+len(data[a_s]['as_links']['prov'])
         data[a_s]['degree'] = len(data[a_s]['as_links']['p2c']) + len(data[a_s]['as_links']['p2p'])
+        data[a_s]['degreeProv'] = len(data[a_s]['as_links']['p2c']) + len(data[a_s]['as_links']['p2p'])+len(data[a_s]['as_links']['prov'])
         # Classifying and figuring out
         # Enterprise ASes: any AS with degree less or equal to two and no customers or peers.
         if data[a_s]['degree'] <= 2 and len(data[a_s]['as_links']['p2c']) == 0 and len(data[a_s]['as_links']['p2p']) == 0:
