@@ -13,17 +13,21 @@ python graph1.py
 python final_proj.py
 ```
 
-This will provide 3 .txt files:
-* AS - all info about each as node, ip prefixes, #'s of peers/customers/providers
-* T1 Inference
-* Customer Cones - Extra credit
+This will provide 3 .txt files: <br />
+- AS - all info about each as node, ip prefixes, #'s of peers/customers/providers <br />
+- T1 Inference <br />
+- Customer Cones - Extra credit <br />
 
 
 * Graph 2: 
+```
 Html file - node distribution [histogram]
+```
 
 * Graph 3: 
+```
 IP Distribution - still working on
+```
 
 * Graph 4 (after final_proj.py is finished): 
 ```
